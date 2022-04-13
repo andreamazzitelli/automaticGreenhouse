@@ -62,13 +62,22 @@ Now is possible to analyze the interaction with AWS from the point of view of th
 <img src="images/board_connections.png" alt="board connections" align="center"/>
 So to conclude this section a brief description on how the board, sensors and actuator are connected. The connections are rather simple as is possible to see from the above image:
 
-<img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0683W00000GLwIr&operationContext=CHATTER&contentId=05T3W00000qmJly&page=0" alt="pin board" width="300" align="right"><br>
+<img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0683W00000GLwIr&operationContext=CHATTER&contentId=05T3W00000qmJly&page=0" alt="pin board" width="400" align="right"><br>
 
 - All the sensors and actuators are connected to Ground and 5V
 - the relay module is connected to the digital pin Arduino pin D2(PA10 on the board)
 - the servo motor is connected to the pin PA15 a PWM pin
 - the dht11 sensor is connected to analog pin A1
 - the capacitive soil moisture sensor is connected to analog pin A0 
-- 
+
 (the position of the pins on the board can be see on the pinout image on the left)
 Obviously the board is connected to a laptop so that it can get power and use the ethos (ethernet-over-serial)  mechanism.
+
+### Network Performances
+Using a tool to analyze packets in the network (like wireshark) is possible to see how the network is affected by the message exchanged by the several components. Indeed the most problematic part of the connection is the link between the board and the mosquitto broker. In particular we have that the network traffic happening using UDP between these two components is:
+- 33 bytes for sending data from the soil moisture sensor 
+- 37 bytes for sending the data from the dht11 sensor. 
+Assuming that the threads handling these measurements are synchronized we can say that a total of circa 16,8 kb per hour are generated and the needed bandwidth to run the system is of at least 4,7 bytes per second. 
+Even if the bandwidth required to run the system is low for today's standards in some situations it may be needed to reduce even more the data transmitted. This is achievable if the transmission interval is increased, but in this the data collected on the cloud is less representative of the real state of the environment. To avoid this loss in accuracy the system could aggregate data on the node, for example at every timeout it does not send the last value sensed by the sensor but the average of the previous interval. So there is a clear tradeoff between the amount of data transmitted on the network and the system’s accuracy.
+The other link of interest is the one between the mosquitto broker and the cloud service provider, the main aspect here is that in the middle there is the transparent bridge that acts on the messages, but even if the message size increases and the protocol used to exchange messages is TCP (that uses in general more messages than UDP), the operation done by the transparent bridge are done on the edge and for this reason the presence of a more reliable bandwidth is almost guaranteed.
+
