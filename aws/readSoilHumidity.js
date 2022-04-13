@@ -1,4 +1,4 @@
-//Exportinf Needed Module
+//Import Needed Modules
 const AWS = require("aws-sdk");
 const ddb = new AWS.DynamoDB.DocumentClient({region: "INSERT HERE YOUR REGION"});
 
