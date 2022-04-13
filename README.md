@@ -61,11 +61,14 @@ Now is possible to analyze the interaction with AWS from the point of view of th
 ### Connections to the Board
 <img src="images/board_connections.png" alt="board connections" align="center"/>
 So to conclude this section a brief description on how the board, sensors and actuator are connected. The connections are rather simple as is possible to see from the above image:
-<img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0683W00000GLwIr&operationContext=CHATTER&contentId=05T3W00000qmJly&page=0" alt="pin board" width="200" align="right">
+
+<img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0683W00000GLwIr&operationContext=CHATTER&contentId=05T3W00000qmJly&page=0" alt="pin board" width="300" align="right"><br>
+
 - All the sensors and actuators are connected to Ground and 5V
 - the relay module is connected to the digital pin Arduino pin D2(PA10 on the board)
 - the servo motor is connected to the pin PA15 a PWM pin
 - the dht11 sensor is connected to analog pin A1
 - the capacitive soil moisture sensor is connected to analog pin A0 
+- 
 (the position of the pins on the board can be see on the pinout image on the left)
 Obviously the board is connected to a laptop so that it can get power and use the ethos (ethernet-over-serial)  mechanism.
