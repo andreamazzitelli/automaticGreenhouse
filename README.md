@@ -31,3 +31,6 @@ In the following section the architecture of the whole system will be described 
 <img src="images/generalArchitecture.png" alt="generalArchitecture" align="center"/>
 <br>
 The general architecture of the network can be described as a chain of blocks that exchange messages; this structure is shown in the image above. More in detail the block that compose the system are:
+1. Nucleo-f401re Board: <img src="images/nucleo.jpg" alt="nucleo_board" width="200" align="right"/><br> it generates and sends data to the broker that is in the next block of the chain using mqtt-sn, it publishes the messages on the topic “topic_out”. Moreover it is subscribed to the topic “topic_in” of the broker in the next block where it reads the instructions that are sent by the user.
+
+2. MOSQUITTO: <img src="images/mosquitto.png" alt="mosquitto" width="200" align="right"/><br> it is a MQTT-SN/MQTT message broker that is the closest block to the board indeed it interacts directly with it. In particular it stores the messages coming from the board in the topic “topic_out” and those going to the board in the topic “topic_in”. In theory any mqtt-sn/mqtt broker can have this role.
