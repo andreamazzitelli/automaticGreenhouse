@@ -11,7 +11,7 @@ exports.handler = (event, context, callback) => {
     });
 }
 
-//Function to add element to connection table
+//Function to remove element to connection table
 function addConnectionId(connectionId) {
     return ddb.delete({
         TableName: 'connection_table',
