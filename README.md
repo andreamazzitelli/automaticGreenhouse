@@ -57,3 +57,15 @@ As already mentioned the cloud service provider used is Amazon Web Services. In 
 
 
 Now is possible to analyze the interaction with AWS from the point of view of the IoT Core broker receiving a message and from the one of a user accessing the web interface. In the former we have that once the broker receives a message, it is received either on the “topic_out_temp” or on the “topic_out_soil” topic in both cases two things happens: the information is stored in the corresponding table and the lambda function to send a messages to all those devices connected through the websocket is invoked passing the data received as message. In the latter we have that the user asks to AWS Amplify using https for the static components of the web application, so soon as this are loaded the javascript in the web page does two things: invokes the REST API to obtain the data store in the DynamoDB tables and connects to the websocket provided by an API of the API Gateway. In this way the client has the data from the last hour and is kept updated thanks to the messages arriving from the websocket. Moreover from the web application the user has the ability by pressing some buttons to invoke an API that invokes a lambda function that publishes a message with a command to the board on the cloud broker.
+
+### Connections to the Board
+<img src="images/board_connections.png" alt="board connections" align="center"/>
+So to conclude this section a brief description on how the board, sensors and actuator are connected. The connections are rather simple as is possible to see from the above image:
+<img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0683W00000GLwIr&operationContext=CHATTER&contentId=05T3W00000qmJly&page=0" alt="pin board" width="200" align="right">
+- All the sensors and actuators are connected to Ground and 5V
+- the relay module is connected to the digital pin Arduino pin D2(PA10 on the board)
+- the servo motor is connected to the pin PA15 a PWM pin
+- the dht11 sensor is connected to analog pin A1
+- the capacitive soil moisture sensor is connected to analog pin A0 
+(the position of the pins on the board can be see on the pinout image on the left)
+Obviously the board is connected to a laptop so that it can get power and use the ethos (ethernet-over-serial)  mechanism.
