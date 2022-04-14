@@ -101,12 +101,13 @@ The first steps to do are:
    3. publish2Broker where to paste the code found in aws/publish2Broker.js and and needs to have permission to access to IoT
    4. readTemeperature: where to paste the code found in aws/readTemperature.js and needs to have permission to access to DynamoDB
    5. readSoilHumidity: where to paste the code found in aws/readSoilHumidity.js and needs to have permission to access to DynamoDB
-   6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API
+   6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API<br>
 ***NOTE: is fundamental to properly set up the permissions given to each function***
 
-- IotCore: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository. 
-Now you need to go on Secure->Policies->name_of_your_device-Policy then click on “Edit Active Policy” and append in the policy resource text area:
-in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in [elements MUST be separate with a comma WITHOUT spaces in between]
-in the second one: resource_arn:topicfilter/topic_in
-in the third one: resource_arn:client/nucleo
+- IotCore: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository so to have a directory tree like in the image on the right (aws-iot-device-sdk-python is a directory).
+<img src="images/tree.jpg" alt="tree" width="200" align="right"><br>
+Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
+   - in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in [elements MUST be separate with a comma WITHOUT spaces in between]
+   - in the second one: resource_arn:topicfilter/topic_in
+   - in the third one: resource_arn:client/nucleo
 Once this is done click on “Save as new version” and set it as active one
