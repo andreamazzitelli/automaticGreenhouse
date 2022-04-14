@@ -70,7 +70,7 @@ So to conclude this section a brief description on how the board, sensors and ac
 - the dht11 sensor is connected to analog pin A1
 - the capacitive soil moisture sensor is connected to analog pin A0 
 
-(the position of the pins on the board can be see on the pinout image on the left)
+(the position of the pins on the board can be see on the pinout image on the left)<br>
 Obviously the board is connected to a laptop so that it can get power and use the ethos (ethernet-over-serial)  mechanism.
 
 ### Network Performances
@@ -82,3 +82,31 @@ Assuming that the threads handling these measurements are synchronized we can sa
 Even if the bandwidth required to run the system is low for today's standards in some situations it may be needed to reduce even more the data transmitted. This is achievable if the transmission interval is increased, but in this the data collected on the cloud is less representative of the real state of the environment. To avoid this loss in accuracy the system could aggregate data on the node, for example at every timeout it does not send the last value sensed by the sensor but the average of the previous interval. So there is a clear tradeoff between the amount of data transmitted on the network and the system’s accuracy.<br><br>
 The other link of interest is the one between the mosquitto broker and the cloud service provider, the main aspect here is that in the middle there is the transparent bridge that acts on the messages, but even if the message size increases and the protocol used to exchange messages is TCP (that uses in general more messages than UDP), the operation done by the transparent bridge are done on the edge and for this reason the presence of a more reliable bandwidth is almost guaranteed.
 
+
+
+# WALKTHROUGH
+The first steps to do are:
+- download and setup RIOT OS as described in the official documentation ([RIOT OFFICIAL DOCUMENTATION](https://doc.riot-os.org/getting-started.html))
+- download and setup the mosquitto broker as described in the official documentation ([DOCUMENTATION](https://github.com/eclipse/mosquitto.rsmb))
+- download this repository
+
+### Cluod Setup
+- DynamoDB: create 3 tables: 
+   1. connection_table with Partition Key a string called“connection_id”
+   2. soil_humidity_table with Partition Key a number called “id”
+   3. temperature_table with Partition Key a number called “id”
+- Lambda: create 6 lambda functions choosing as language Node.js 14.x where to paste the code provided in this repository under the aws directory (see later for a brief description on how to add permission to a lambda function):
+   1. connect: where to paste the code found in aws/connect.js and needs to have permission to access to DynamoDB
+   2. disconnect: where to paste the code found in aws/disconnect.js and needs to have permission to access to DynamoDB
+   3. publish2Broker where to paste the code found in aws/publish2Broker.js and and needs to have permission to access to IoT
+   4. readTemeperature: where to paste the code found in aws/readTemperature.js and needs to have permission to access to DynamoDB
+   5. readSoilHumidity: where to paste the code found in aws/readSoilHumidity.js and needs to have permission to access to DynamoDB
+   6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API
+***NOTE: is fundamental to properly set up the permissions given to each function***
+
+- IotCore: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository. 
+Now you need to go on Secure->Policies->name_of_your_device-Policy then click on “Edit Active Policy” and append in the policy resource text area:
+in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in [elements MUST be separate with a comma WITHOUT spaces in between]
+in the second one: resource_arn:topicfilter/topic_in
+in the third one: resource_arn:client/nucleo
+Once this is done click on “Save as new version” and set it as active one
