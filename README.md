@@ -145,7 +145,7 @@ python3 transparent_bridge.py
 as before leave the bridge running and open a new terminal in the same  folder and execute 
 
 ```
-make BOARD=nucleo-f401re flash term
+make flash term
 ```
 
 once the command is done i.e the serial monitor is shown, open a new terminal and execute the following command 
