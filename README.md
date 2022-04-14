@@ -118,7 +118,7 @@ The next step is to configure the rules of the rule engine so go on Act->Rules, 
 
 - ***API Gateway***: there are 2 APIs needed:
    - a WebSocket API called “sensors” with 4 routes each calling a lambda function: $connect that calls “connect”, $disconnect that calls “disconnect”, readTemp that calls “readTemp4WebSocket” and readSoil that also calls “readTEmp4WebSocket”.
-   - a REST API also called sensors that has the structure in the image (take note of which are the endpoints of these resources because, because there will be needed on a later step) <img src="images/REST\ API\ tree.png" alt="rest api tree" width="200" align="right"/><br>
+   - a REST API also called sensors that has the structure in the image (take note of which are the endpoints of these resources because, because there will be needed on a later step) <img src="images/REST%20API%20tree.png" alt="rest api tree" width="200" align="right"/><br>
 
 
 
