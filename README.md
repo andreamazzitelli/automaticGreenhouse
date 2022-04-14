@@ -91,11 +91,11 @@ The first steps to do are:
 - download this repository
 
 ### Cluod Setup
-- DynamoDB: create 3 tables: 
+- ***DynamoDB***: create 3 tables: 
    1. connection_table with Partition Key a string called“connection_id”
    2. soil_humidity_table with Partition Key a number called “id”
    3. temperature_table with Partition Key a number called “id”
-- Lambda: create 6 lambda functions choosing as language Node.js 14.x where to paste the code provided in this repository under the aws directory (see later for a brief description on how to add permission to a lambda function):
+- ***Lambda***: create 6 lambda functions choosing as language Node.js 14.x where to paste the code provided in this repository under the aws directory (see later for a brief description on how to add permission to a lambda function):
    1. connect: where to paste the code found in aws/connect.js and needs to have permission to access to DynamoDB
    2. disconnect: where to paste the code found in aws/disconnect.js and needs to have permission to access to DynamoDB
    3. publish2Broker where to paste the code found in aws/publish2Broker.js and and needs to have permission to access to IoT
@@ -104,10 +104,21 @@ The first steps to do are:
    6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API<br>
 ***NOTE: is fundamental to properly set up the permissions given to each function***
 
-- IotCore: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository so to have a directory tree like in the image on the right (aws-iot-device-sdk-python is a directory).
-<img src="images/tree.jpg" alt="tree" width="200" align="right"><br>
+- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository so to have a directory tree like in the image on the right (aws-iot-device-sdk-python is a directory).
+<img src="images/tree.png" alt="tree" width="200" align="right"/><br>
 Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
    - in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in [elements MUST be separate with a comma WITHOUT spaces in between]
    - in the second one: resource_arn:topicfilter/topic_in
    - in the third one: resource_arn:client/nucleo
-Once this is done click on “Save as new version” and set it as active one
+Once this is done click on “Save as new version” and set it as active one. <br>
+
+The next step is to configure the rules of the rule engine so go on Act->Rules, here you need to create two rules:
+   - in the first one set the “Rule query statement” as “SELECT temperature, humidity FROM 'topic_out_temp' “ and add the action to “insert a message into DynamoDB” giving as table name “temperature_table”, Partition key “id” and as Partition Key Value “$(timestamp())” (this will create a new element in the table with id the epoch time). Once this action has been added click again “Add Action” and select “Send message to Lambda Function” selecting as lambda function readTemp4WebSocket
+   - in the second one set the “Rule query statement” as “SELECT soil_humidity FROM 'topic_out_soil'”, also here add the same action as the other rule changing only the table name in “soil_humidity_table”
+
+- ***API Gateway***: there are 2 APIs needed:
+   - a WebSocket API called “sensors” with 4 routes each calling a lambda function: $connect that calls “connect”, $disconnect that calls “disconnect”, readTemp that calls “readTemp4WebSocket” and readSoil that also calls “readTEmp4WebSocket”.
+   - a REST API also called sensors that has the structure in the image (take note of which are the endpoints of these resources because, because there will be needed on a later step) <img src="images/REST\ API\ tree.png" alt="rest api tree" width="200" align="right"/><br>
+
+
+
