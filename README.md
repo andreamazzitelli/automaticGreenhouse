@@ -116,9 +116,37 @@ The next step is to configure the rules of the rule engine so go on Act->Rules, 
    - in the first one set the “Rule query statement” as “SELECT temperature, humidity FROM 'topic_out_temp' “ and add the action to “insert a message into DynamoDB” giving as table name “temperature_table”, Partition key “id” and as Partition Key Value “$(timestamp())” (this will create a new element in the table with id the epoch time). Once this action has been added click again “Add Action” and select “Send message to Lambda Function” selecting as lambda function readTemp4WebSocket
    - in the second one set the “Rule query statement” as “SELECT soil_humidity FROM 'topic_out_soil'”, also here add the same action as the other rule changing only the table name in “soil_humidity_table”
 
-- ***API Gateway***: there are 2 APIs needed:
+- ***API Gateway***: there are 2 APIs needed:<img src="images/REST%20API%20tree.png" alt="rest api tree" width="200" align="right"/><br>
    - a WebSocket API called “sensors” with 4 routes each calling a lambda function: $connect that calls “connect”, $disconnect that calls “disconnect”, readTemp that calls “readTemp4WebSocket” and readSoil that also calls “readTEmp4WebSocket”.
-   - a REST API also called sensors that has the structure in the image (take note of which are the endpoints of these resources because, because there will be needed on a later step) <img src="images/REST%20API%20tree.png" alt="rest api tree" width="200" align="right"/><br>
+   - a REST API also called sensors that has the structure in the image. In particular the POST on / should call the "publish2Broker" function, the GET on /soil_humidity should call "readSoilHumidity", the GET on /temperature_humidity should call "readTemperature". (take note of which are the endpoints of these resources because, because there will be needed on a later step)
 
+- ***AWS Amplify***: first you need to edit the file index.html changing adding the link to your API in the following lines → da specificare alla fine. Once this is done create a new project and load the index.html file that you find inside the directory web app of this repository
 
+With this the AWS setup is done.
+
+### Board Setup
+The next steps are:
+- connect the sensors to the board like shown in the previous image.
+- connect the board to you machine
+<br>
+Now go to the mosquitto.rsmb/rsmb/src folder and execute the following command:
+```
+./broker_mqtt config.conf
+```
+and leave the broker running. <br>
+Open a new terminal on MAIN/automaticGreenhouse and open the transparent_bridge.py and put on line (metti le righe) the corresponding path to the files downloaded from aws, save and close. Then execute:
+```
+python3 transparent_bridge.py
+```
+as before leave the bridge running and open a new terminal in the same  folder and execute 
+```
+make BOARD=nucleo-f401re flash term
+```
+
+once the command is done i.e the serial monitor is shown, open a new terminal and execute the following command 
+```
+sudo ip a a 2000:2::1 dev tap0
+```
+
+then press the reset button on the board and after a few seconds if everything has been set up correctly the board should start to operate and on the web application the measurement should be showing.
 
