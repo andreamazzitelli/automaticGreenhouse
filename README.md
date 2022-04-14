@@ -130,20 +130,26 @@ The next steps are:
 - connect the board to you machine
 <br>
 Now go to the mosquitto.rsmb/rsmb/src folder and execute the following command:
+
 ```
 ./broker_mqtt config.conf
 ```
+
 and leave the broker running. <br>
 Open a new terminal on MAIN/automaticGreenhouse and open the transparent_bridge.py and put on line (metti le righe) the corresponding path to the files downloaded from aws, save and close. Then execute:
+
 ```
 python3 transparent_bridge.py
 ```
+
 as before leave the bridge running and open a new terminal in the same  folder and execute 
+
 ```
 make BOARD=nucleo-f401re flash term
 ```
 
 once the command is done i.e the serial monitor is shown, open a new terminal and execute the following command 
+
 ```
 sudo ip a a 2000:2::1 dev tap0
 ```
