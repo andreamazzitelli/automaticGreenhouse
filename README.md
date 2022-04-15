@@ -107,9 +107,9 @@ The first steps to do are:
 - ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have douwnloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository so to have a directory tree like in the image on the right (aws-iot-device-sdk-python is a directory).
 <br>
 Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
-   - in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in (elements MUST be separate with a comma WITHOUT spaces in between),
-   - in the second one: resource_arn:topicfilter/topic_in,
-   - in the third one: resource_arn:client/nucleo,
+- in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in (elements MUST be separate with a comma WITHOUT spaces in between),
+- in the second one: resource_arn:topicfilter/topic_in,
+- in the third one: resource_arn:client/nucleo,
 Once this is done click on “Save as new version” and set it as active one. <br>
 
 The next step is to configure the rules of the rule engine so go on Act->Rules, here you need to create two rules:
