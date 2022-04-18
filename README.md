@@ -124,6 +124,7 @@ The next step is to configure the rules of the rule engine so go on Act->Rules, 
    - 372, inside the fetch add as a string the URL to the API that returns the values obtained from the dht11 sensor,
    - 382, inside the fetch add as a string the URL to the API that returns the values obtained from the soil moisture sensor,
    - 451 as first parameter inside the fetch add as a string the URL to the API that allows us to send commands to the board.
+   
    Once this is done create a new project and load the index.html file that you find inside the directory web app of this repository
 
 With this the AWS setup is done.
