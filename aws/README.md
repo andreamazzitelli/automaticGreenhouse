@@ -1,5 +1,5 @@
 # AWS
-in thi directory you can find all the code for the lambda function. In some of the there must be added some information relative the the aws account (i.e region of the resource).
+in this directory you can find all the code for the lambda function. In some of them must be added some information relative the the aws account (i.e region of the resource).
 
 Moreover make sure to grant the following permissions (to easy the process simply grant the function all the permissions to the service):
 - connect: write on table connection_table of DynamoDB
