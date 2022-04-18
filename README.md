@@ -120,7 +120,11 @@ The next step is to configure the rules of the rule engine so go on Act->Rules, 
    - a WebSocket API called “sensors” with 4 routes each calling a lambda function: $connect that calls “connect”, $disconnect that calls “disconnect”, readTemp that calls “readTemp4WebSocket” and readSoil that also calls “readTEmp4WebSocket”.
    - a REST API also called sensors that has the structure in the image. In particular the POST on / should call the "publish2Broker" function, the GET on /soil_humidity should call "readSoilHumidity", the GET on /temperature_humidity should call "readTemperature". (take note of which are the endpoints of these resources because, because there will be needed on a later step)
 
-- ***AWS Amplify***: first you need to edit the file index.html changing adding the link to your API in the following lines → da specificare alla fine. Once this is done create a new project and load the index.html file that you find inside the directory web app of this repository
+- ***AWS Amplify***: first you need to edit the file index.html changing adding the link to your API in the following lines:
+   - 372, inside the fetch add as a string the URL to the API that returns the values obtained from the dht11 sensor,
+   - 382, inside the fetch add as a string the URL to the API that returns the values obtained from the soil moisture sensor,
+   - 451 as first parameter inside the fetch add as a string the URL to the API that allows us to send commands to the board.
+   Once this is done create a new project and load the index.html file that you find inside the directory web app of this repository
 
 With this the AWS setup is done.
 
