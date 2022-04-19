@@ -97,12 +97,14 @@
         <button type="button" id="r0" onclick="sendCommand('r0')"> Relay Always Off</button>
         <div></div>
         <button type="button" id="r2" onclick="sendCommand('r2')"> Relay Automatic</button>
+        <!--
         <hr>
         <form>
           <input type="number" name="temp" id="temp_field">
           <input type="button" value="New Goal Temperature"
             onclick="sendCommand(document.getElementById('temp_field').value)">
         </form>
+        -->
       </div>
     </div>
     <div class="buttons2">
@@ -148,7 +150,7 @@
       datasets: [{
         label: 'Temperature',
         backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255,69,0)',
         fill: false,
         tension: 0.4,
         data: [],
@@ -158,8 +160,8 @@
       labels: labels_hum,
       datasets: [{
         label: 'Humidity',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 	'rgb(0,0,255)',
+        borderColor: ' ',
         fill: false,
         tension: 0.4,
         data: [],
@@ -171,7 +173,7 @@
       datasets: [{
         label: 'Soil Moisture',
         backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(50,205,50)',
         fill: false,
         tension: 0.4,
         data: [],
@@ -452,8 +454,8 @@
           .then(data => { console.log("EHI"); console.log(data.status); console.log("EHO"); return data; })
           .catch(err => { console.log(err); return 1 })
         if (result == 1) {
-          //alert("CANNOT SEND THE COMMAND, TRY AGAIN")
-          //return; //DA DECOMMENTARE 
+          alert("CANNOT SEND THE COMMAND, TRY AGAIN")
+          return;
         }
 
         setLocalStorage(commad)
