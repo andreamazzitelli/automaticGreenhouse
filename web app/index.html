@@ -14,11 +14,13 @@
     text-align: center;
   }
 
-  h1, h4 {
+  h1,
+  h4 {
     text-align: center;
   }
 
-  .container { /*defining the structure of the page*/
+  .container {
+    /*defining the structure of the page*/
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -30,20 +32,53 @@
       "chartHum buttons data_temp"
       "chartSoil infobox3 buttons2";
   }
+
   /*Assign id to a position*/
-  .title {grid-area: title;}
-  .charTemp {grid-area: charTemp;}
-  .chartHum { grid-area: chartHum;}
-  .chartSoil {grid-area: chartSoil;}
-  .infobox1 {grid-area: infobox1;}
-  .infobox2 {grid-area: infobox2;}
-  .infobox3 {grid-area: infobox3;}
-  .buttons {grid-area: buttons;}
-  .buttons2 {grid-area: buttons2;}
-  .data_temp {grid-area: data_temp;}
+  .title {
+    grid-area: title;
+  }
+
+  .charTemp {
+    grid-area: charTemp;
+  }
+
+  .chartHum {
+    grid-area: chartHum;
+  }
+
+  .chartSoil {
+    grid-area: chartSoil;
+  }
+
+  .infobox1 {
+    grid-area: infobox1;
+  }
+
+  .infobox2 {
+    grid-area: infobox2;
+  }
+
+  .infobox3 {
+    grid-area: infobox3;
+  }
+
+  .buttons {
+    grid-area: buttons;
+  }
+
+  .buttons2 {
+    grid-area: buttons2;
+  }
+
+  .data_temp {
+    grid-area: data_temp;
+  }
 
 
-  .button_stack {display: block;}
+  .button_stack {
+    display: block;
+  }
+
   .infobox {
     height: 30vh;
     width: 20vw;
@@ -59,12 +94,14 @@
     <div class="title">
       <h1>Automatic Greenhouse</h1>
       <h4>take care of your plants without effort</h4>
-      <p>This is the individual project for the course of Internet of Things 2021/2022 of the Master in Computer Science,
+      <p>This is the individual project for the course of Internet of Things 2021/2022 of the Master in Computer
+        Science,
         La Sapienza Università di Roma.
         <br>The idea behind this project is to create a smart greenhouse for plants that can measure the environment in
         which the plant is and act depending on the values it sense.
         All the values registered by the sensors are sent to AWS where are processed and stored.
-        A user once on this web interface not only can access the most recent stored values but it is also notified in real
+        A user once on this web interface not only can access the most recent stored values but it is also notified in
+        real
         time of the values that are being sensed,
         moreover from this web interface the user can simply interact with the actuator directly influencing their
         status.
@@ -161,7 +198,7 @@
       labels: labels_hum,
       datasets: [{
         label: 'Humidity',
-        backgroundColor: 	'rgb(0,0,255)',
+        backgroundColor: 'rgb(0,0,255)',
         borderColor: 'rgb(0,0,255)',
         pointBackgroundColor: 'rgb(0,0,255)',
         fill: false,
@@ -240,6 +277,19 @@
 
         //console.log(new_temp)
         //console.log(new_hum)
+        var ptagTemp = document.createElement('p')
+        var ptagHum = document.createElement('p')
+
+        var textTemp = time + " - temperature: " + parseFloat(new_temp) + "°C\n"
+        var textHum = time + "- humidity: " + parseFloat(new_hum)
+        var pcontentTemp = document.createTextNode(textTemp)
+        var pcontentHum = document.createTextNode(textHum)
+
+        ptagTemp.appendChild(pcontentTemp)
+        document.getElementById("infobox1").appendChild(ptagTemp)
+
+        ptagHum.appendChild(pcontentHum)
+        document.getElementById("infobox2").appendChild(ptagHum)
 
         chartTemp.data.labels.push(time)
         chartTemp.data.datasets[0].data.push(new_temp)
@@ -255,6 +305,13 @@
       else if (data.includes("soil_humidity")) {
         data = JSON.parse(event.data)
         var new_soil = data["soil_humidity"]
+
+        var ptagSoilHum = document.createElement('p')
+        var textSoilHum = time + "- humidity: " + parseFloat(new_soil)
+        var pcontentSoilHum = document.createTextNode(textSoilHum)
+
+        ptagSoilHum.appendChild(pcontentSoilHum)
+        document.getElementById("infobox3").appendChild(ptagSoilHum)
 
         chartSoil.data.labels.push(time)
         chartSoil.data.datasets[0].data.push(parseFloat(new_soil))
@@ -475,7 +532,7 @@
       var sum_temp = array_temp.reduce((a, b) => parseInt(a) + parseInt(b), 0);
       var avg_temp = (sum_temp / array_temp.length) || 0;
 
-      var sum_hum = array_hum.reduce((a, b) => a + b, 0);
+      var sum_hum = array_hum.reduce((a, b) => parseInt(a) + parseInt(b), 0);
       var avg_hum = (sum_hum / array_hum.length) || 0;
 
       if (array_temp.length != 0) {
@@ -491,7 +548,7 @@
         document.getElementById("avg_temp").innerHTML = "AVG in last Hour:" + Math.round(avg_temp * 100) / 100 + "°C, " + Math.round(avg_hum * 100) / 100 + "%"
         document.getElementById("MAX_temp").innerHTML = "MAX in last Hour:" + max_temp + "°C, " + max_hum + "%"
         document.getElementById("MIN_temp").innerHTML = "MIN in last Hour:" + min_temp + "°C, " + min_hum + "%"
-        document.getElementById("delta_temp").innerHTML = "Variation in last Hour:" + Math.round(delta_temp*100) / 100 + "°C, " + Math.round(delta_hum*100) / 100 + "%"
+        document.getElementById("delta_temp").innerHTML = "Variation in last Hour:" + Math.round(delta_temp * 100) / 100 + "°C, " + Math.round(delta_hum * 100) / 100 + "%"
         //commentato perchè se faccio danni quello sotto funziona
         //document.getElementById("delta_temp").innerHTML = "Variation in last Hour:" + delta_temp.toString() + "°C, " + delta_hum.toString() + "%"
       }
@@ -512,7 +569,7 @@
         document.getElementById("avg_soil").innerHTML = "AVG in last Hour:" + Math.round(avg_soil * 100) / 100 + "%"
         document.getElementById("MAX_soil").innerHTML = "MAX in last Hour:" + max_soil + "%"
         document.getElementById("MIN_soil").innerHTML = "MIN in last Hour:" + min_soil + "%"
-        document.getElementById("delta_soil").innerHTML = "Variation in last Hour:" + Math.round(delta_soil*100) / 100 + "%"
+        document.getElementById("delta_soil").innerHTML = "Variation in last Hour:" + Math.round(delta_soil * 100) / 100 + "%"
         // document.getElementById("delta_soil").innerHTML = "Variation in last Hour:" + delta_soil.toString() + "%"
 
       }
