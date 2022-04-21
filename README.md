@@ -106,7 +106,7 @@ The first steps to do are:
    6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API<br>
 ***NOTE: is fundamental to properly set up the permissions given to each function***
 
-- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Move this files inside the aws folder in the directory downloaded from this repository so to have a directory tree like in the image on the right (aws-iot-device-sdk-python is a directory).
+- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Now for the system to work build a directory like the one in the image on the right (all the file in the aws directory were downloaded after this first step of the IoTCore)<img src="images/tree.png" alt="pin board" width="400" align="right">.
 <br>
 Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
 - in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in (elements MUST be separate with a comma WITHOUT spaces in between),
