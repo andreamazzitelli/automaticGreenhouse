@@ -105,9 +105,10 @@ The first steps to do are:
    5. readSoilHumidity: where to paste the code found in aws/readSoilHumidity.js and needs to have permission to access to DynamoDB
    6. readTemp4WebSocket: where to paste the code found in aws/readTemp4WebSocket.js and needs to have permission to access to DynamoDB, API Gateway and Execute API<br>
 ***NOTE: is fundamental to properly set up the permissions given to each function***
-<img src="images/tree.png" alt="pin board" width="100" align="right">.
-<br>
-- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. Now for the system to work build a directory like the one in the image on the right (all the file in the aws directory were downloaded after this first step of the IoTCore)
+
+
+- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. 
+- <img src="images/tree.png" alt="pin board" width="200" align="right">.Now for the system to work build a directory like the one in the image on the right (all the file in the aws directory were downloaded after this first step of the IoTCore)
 <br>
 Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
 - in the first one: resource_arn:topic/topic_out_soil,resource_arn:topic/topic_out_temp,resource_arn:topic/topic_in (elements MUST be separate with a comma WITHOUT spaces in between),
