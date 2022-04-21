@@ -168,3 +168,4 @@ then press the reset button on the board and after a few seconds if everything h
 I decided to focus a specific aspect of the project: how to connect the nucleo-f401re to the cloud. <a href="https://www.hackster.io/mazzitelli1835022/connect-riot-os-with-the-cloud-4bf88a">Here's the link to the blogpost</a>
 # Linkedin:
 Here is my <a href="https://www.linkedin.com/in/andrea-mazzitelli/">Linkedin Account</a>
+#YouTube Video
