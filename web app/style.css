@@ -1,0 +1,78 @@
+p {
+    display: block;
+    text-align: center;
+  }
+
+  h1,
+  h4 {
+    text-align: center;
+  }
+
+  .container {
+    /*defining the structure of the page*/
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "title title title"
+      "charTemp infobox1 infobox2"
+      "chartHum buttons data_temp"
+      "chartSoil infobox3 buttons2";
+  }
+
+  /*Assign id to a position*/
+  .title {
+    grid-area: title;
+  }
+
+  .charTemp {
+    grid-area: charTemp;
+  }
+
+  .chartHum {
+    grid-area: chartHum;
+  }
+
+  .chartSoil {
+    grid-area: chartSoil;
+  }
+
+  .infobox1 {
+    grid-area: infobox1;
+  }
+
+  .infobox2 {
+    grid-area: infobox2;
+  }
+
+  .infobox3 {
+    grid-area: infobox3;
+  }
+
+  .buttons {
+    grid-area: buttons;
+  }
+
+  .buttons2 {
+    grid-area: buttons2;
+  }
+
+  .data_temp {
+    grid-area: data_temp;
+  }
+
+
+  .button_stack {
+    display: block;
+  }
+
+  .infobox {
+    height: 30vh;
+    width: 20vw;
+    overflow: auto;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: 5% 10% 0% 10%;
+  }
