@@ -107,7 +107,7 @@ The first steps to do are:
 ***NOTE: is fundamental to properly set up the permissions given to each function***
 
 
-- ***IotCore***: click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. <img src="images/tree.png" alt="pin board" width="300" align="right">
+- ***IotCore***: <img src="images/tree.png" alt="pin board" width="250" align="right">click on “Connect a device” and follow the steps using as name of the thing "nucleo-board", at the end of the guided procedure it should have downloaded the following files: root-CA.crt, nucleo-board.cert.pem, nucleo-board.private.key. 
 Now for the system to work build a directory like the one in the image on the right (all the file in the aws directory were downloaded after this first step of the IoTCore)
 <br>
 Now always from the IoT Core you need to go on Secure->Policies->nucleo-board-Policy then click on “Edit Active Policy” and append in the policy resource text area:
