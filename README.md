@@ -171,4 +171,5 @@ I decided to focus a specific aspect of the project: how to connect the nucleo-f
 # Linkedin:
 Here is my <a href="https://www.linkedin.com/in/andrea-mazzitelli/">Linkedin Account</a>
 # YouTube Video:
+To provide a better overview of the system and it's functionalities. The demo is not done in a real environment (i.e with sensors/actuators put inside a real greenhouse) becuase the phenomenon that the system sense usually does not drastically change in a brief period of time (both temperature and soil moisture need sometimes to increase or decrease). So for sake semplicity in showing the result, in the demo I manully alter the values sensed by either using an hairdryer on the temperature sensor or by forcing the soil moisture sensor to sense lower level of moisture.
 Here is the link to the demo: <a href="https://youtu.be/zmuy0vqKZXE">YouTube Video</a>
