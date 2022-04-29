@@ -44,6 +44,11 @@ Moreover we have another peculiarity in how the messages are published on the cl
 
 5. ***Web Application***: <br> last block of the chain. Allows the user to visualize the data collected by the system and interact with it. In particular using charts the user can see not only the measurements of the last hour but also see them almost in real time (we need to take into account the latency needed by the data to go from the board to the cloud services). Moreover some aggregated values are provided to the user like: the average, minimum and maximum values and the variation.
 
+<div>
+   <img src="images/web_interface_1.png" alt="web1" width=49% style="display:inline-block; margin-right: 2%;"/>
+   <img src="images/web_interface_2.png" alt="web2" width=49% style="display:inline-block;"/>
+</div>
+
 ### Cloud Services
 
 <img src="images/awsArchitecture.png" alt="awsArchitecture" align="center"/>
@@ -164,7 +169,8 @@ once the command is done i.e the serial monitor is shown, open a new terminal an
 sudo ip a a 2000:2::1 dev tap0
 ```
 
-then press the reset button on the board and after a few seconds if everything has been set up correctly the board should start to operate and on the web application the measurement should be showing.
+then press the reset button on the board and after a few seconds if everything has been set up correctly the board should start to operate and on the 
+application the measurement should be showing.
 
 
 # BLOG POST: 
@@ -174,3 +180,6 @@ Here is my <a href="https://www.linkedin.com/in/andrea-mazzitelli/">Linkedin Acc
 # YouTube Video:
 To provide a better overview of the system and it's functionalities. The demo is not done in a real environment (i.e with sensors/actuators put inside a real greenhouse) becuase the phenomenon that the system sense usually does not drastically change in a brief period of time (both temperature and soil moisture need sometimes to increase or decrease). So for sake semplicity in showing the result, in the demo I manully alter the values sensed by either using an hairdryer on the temperature sensor or by forcing the soil moisture sensor to sense lower level of moisture.
 Here is the link to the demo: <a href="https://youtu.be/zmuy0vqKZXE">YouTube Video</a>
+
+
+# Photos
