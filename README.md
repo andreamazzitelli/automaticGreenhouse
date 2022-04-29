@@ -183,3 +183,20 @@ Here is the link to the demo: <a href="https://youtu.be/zmuy0vqKZXE">YouTube Vid
 
 
 # Photos
+<div>
+<img src="images/all_1.jpg" width=30% style="display:inline-block; margin-right=2%"/>
+<img src="images/all_2.jpg" width=30% style="display:inline-block; margin-right=2%"/>
+</div><br>
+<div>
+<img src="images/all_3.jpg" width=100% style="display:inline-block; margin-right=2%"/>
+</div><br>
+<div>
+<img src="images/photo_off_1.png" width=30% style="display:inline-block; margin-right=2%"/>
+<img src="images/photo_off_2.png" width=30% style="display:inline-block; margin-right=2%"/>
+<img src="images/photo_on_1.png" width=30% style="display:inline-block; margin-right=2%"/>
+</div><br>
+<div>
+<img src="images/servo_pipe.jpg" width=30% style="display:inline-block; margin-right=2%"/>
+<img src="images/relay_bulb.jpg" width=30% style="display:inline-block; margin-right=2%"/>
+</div><br>                                                        
+                                                        
